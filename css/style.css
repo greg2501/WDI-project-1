@@ -1,0 +1,36 @@
+body {
+  background: dodgerblue;
+  box-sizing: border-box; }
+  body main {
+    display: flex;
+    justify-content: center; }
+    body main .board {
+      background: white;
+      display: flex;
+      flex-wrap: wrap;
+      width: 500px; }
+      body main .board .square {
+        width: 25px;
+        height: 25px;
+        /* border: 1px solid lightgreen; */
+        display: flex;
+        justify-content: center;
+        align-items: center; }
+
+        .laser {
+          width: 5px;
+          height: 10px;
+          background: pink; }
+
+            .alien {
+              width: 19px;
+              height: 19px;
+              background: red;
+               }
+              .player {
+                width: 20px;
+                height: 20px;
+                background: orange;
+              }
+
+/*# sourceMappingURL=style.css.map */
