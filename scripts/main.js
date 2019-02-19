@@ -34,15 +34,15 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     switch(e.keyCode) {
       case 37:
-        playerIndex--
+      playerIndex--
       gameBoard[playerIndex].classList.add('player')
       player.position.push(playerIndex)
-        break
+      break
       case 39:
-        playerIndex++
-        gameBoard[playerIndex].classList.add('player')
-        player.position.push(playerIndex)
-        break
+      playerIndex++
+      gameBoard[playerIndex].classList.add('player')
+      player.position.push(playerIndex)
+      break
     }
 
     //add laser
@@ -50,9 +50,9 @@ window.addEventListener('DOMContentLoaded', () => {
       const laserIndex = playerIndex
       switch(e.keyCode) {
         case 32:
-          gameBoard[laserIndex].classList.add('laser')
-          laser.position.push(laserIndex)
-          break
+        gameBoard[laserIndex].classList.add('laser')
+        laser.position.push(laserIndex)
+        break
       }
     }
 
@@ -88,15 +88,16 @@ window.addEventListener('DOMContentLoaded', () => {
   gameBoard[11].classList.add('alien')
 
   // move aliens
+  const aliens = document.querySelectorAll('.alien')
   let movesMade = 0
   // let isMovingRight = true
   setInterval(() => {
     movesMade++
     console.log(movesMade)
-    const aliens = document.querySelectorAll('.alien')
     for(let i = 0; i < aliens.length; i++) {
       if (movesMade === 14) {
         movesMade = 0
+        // isMovingRight
       } else if(movesMade < 7) {
         gameBoard[alien.position[i]].classList.remove('alien')
         alien.position[i] = alien.position[i] + 1
@@ -110,6 +111,13 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     }
   }, 1000)
-
+  setInterval(() => {
+    for(let i = 0; i < aliens.length; i++) {
+      gameBoard[alien.position[i]].classList.remove('alien')
+      alien.position[i] = alien.position[i] + 20
+      gameBoard[alien.position[i]].classList.add('alien')
+      alien.position.push(alienIndex)
+    }
+  }, 7000)
 
 }) //page end
