@@ -1,36 +1,53 @@
 body {
   background: dodgerblue;
-  box-sizing: border-box; }
-  body main {
-    display: flex;
-    justify-content: center; }
-    body main .board {
-      background: white;
-      display: flex;
-      flex-wrap: wrap;
-      width: 500px; }
-      body main .board .square {
-        width: 25px;
-        height: 25px;
-        /* border: 1px solid lightgreen; */
-        display: flex;
-        justify-content: center;
-        align-items: center; }
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-around;
+}
 
-        .laser {
-          width: 5px;
-          height: 10px;
-          background: pink; }
+body main {
+  display: flex;
+  justify-content: center;
+}
 
-            .alien {
-              width: 19px;
-              height: 19px;
-              background: red;
-               }
-              .player {
-                width: 20px;
-                height: 20px;
-                background: orange;
-              }
+header {
+  max-width: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+}
 
-/*# sourceMappingURL=style.css.map */
+body main .board {
+  background: white;
+  display: flex;
+  flex-wrap: wrap;
+  width: 750px;
+}
+
+body main .board .square {
+  width: 25px;
+  height: 25px;
+  /* border: 1px solid lightgreen; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.alien {
+  width: 19px;
+  height: 19px;
+  background: red;
+}
+
+.player {
+  width: 20px;
+  height: 20px;
+  background: orange;
+}
+
+  .laser {
+  width: 5px;
+  height: 10px;
+  background: pink;
+}
