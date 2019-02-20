@@ -2,7 +2,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const board = document.querySelector('.board')
 
-
   //create gameboard
   for(let i = 0; i < 720; i++) {
     const square = document.createElement('div')
@@ -27,7 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if(playerIndex > 690) {
       playerIndex--
     }
-    if(playerIndex < 719) {
+    if(playerIndex < 718) {
       playerIndex++
     }
     switch(e.keyCode) {
@@ -61,14 +60,34 @@ window.addEventListener('DOMContentLoaded', () => {
     for(let x = 0; x < laser.position.length; x++) {
       if (laser.position[x] < 0) {
         laser.position = laser.position.filter(laser => laser > 0)
-        // squareElement[missile.position[x]].classList.remove('missile')
       } else {
         gameBoard[laser.position[x]].classList.remove('laser')
         laser.position[x] = laser.position[x] - 30
         gameBoard[laser.position[x]].classList.add('laser')
       }
+      checkHit(x)
     }
   }
+
+  const scoreBoard = document.querySelector('.score')
+  let score = 0
+  function checkHit(laserElement) {
+
+    const laserIndex = laser.position[laserElement]
+    for (let x = 0; x < alien.position.length; x++) {
+      if (alien.position[x] === laserIndex) {
+        alien.position.splice(x, 1)
+        laser.position.splice(laserElement, 1)
+        gameBoard[laserIndex].classList.remove('alien', 'laser')
+        score++
+        scoreBoard.textContent = score
+        if (score === 14) {
+          clearInterval(timer)
+        }
+      }
+    }
+  }
+
 
   // place aliens on board
   const alien = {
@@ -94,9 +113,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
   // move aliens
+  // let internal1 = null
   const aliens = document.querySelectorAll('.alien')
   let movesMade = 0
-  setInterval(() => {
+  const timer = setInterval(() => {
     movesMade++
     for(let i = 0; i < aliens.length; i++) {
       if (movesMade === 30) {
@@ -110,14 +130,14 @@ window.addEventListener('DOMContentLoaded', () => {
         alien.position[i] = alien.position[i] + 30
         gameBoard[alien.position[i]].classList.add('alien')
         alien.position.push(alienIndex)
+      } else if (movesMade > 15 && movesMade < 30) {
+        gameBoard[alien.position[i]].classList.remove('alien')
+        alien.position[i] = alien.position[i] - 1
+        gameBoard[alien.position[i]].classList.add('alien')
+        alien.position.push(alienIndex)
       } else if(movesMade < 15) {
         gameBoard[alien.position[i]].classList.remove('alien')
         alien.position[i] = alien.position[i] + 1
-        gameBoard[alien.position[i]].classList.add('alien')
-        alien.position.push(alienIndex)
-      }  else if (movesMade > 15 && movesMade < 30) {
-        gameBoard[alien.position[i]].classList.remove('alien')
-        alien.position[i] = alien.position[i] - 1
         gameBoard[alien.position[i]].classList.add('alien')
         alien.position.push(alienIndex)
       }
@@ -125,7 +145,9 @@ window.addEventListener('DOMContentLoaded', () => {
   }, 1000)
 
 
-  window.setInterval(moveLaser, 50)
+
+
+  window.setInterval(moveLaser, 25)
   window.addEventListener('keydown', shooting)
   window.addEventListener('keydown', movePlayer)
 }) //page end
