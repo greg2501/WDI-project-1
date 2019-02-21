@@ -1,8 +1,11 @@
 body {
-  background: dodgerblue;
   box-sizing: border-box;
   display: flex;
   justify-content: space-around;
+  background-image: url('../images/space.jpeg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 body main {
@@ -14,12 +17,24 @@ header {
   max-width: 100px;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
+}
+
+h1 {
+  width: 200px;
+  height: 200px;
+  background-image: url('../images/logo.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+h2 {
   color: white;
 }
 
 body main .board {
-  background: white;
   display: flex;
   flex-wrap: wrap;
   width: 750px;
@@ -28,7 +43,6 @@ body main .board {
 body main .board .square {
   width: 25px;
   height: 25px;
-  /* border: 1px solid lightgreen; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,7 +51,11 @@ body main .board .square {
 .alien {
   width: 19px;
   height: 19px;
-  background: red;
+  background-image: url('../images/alien.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
 }
 
 .player {

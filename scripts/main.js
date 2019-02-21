@@ -116,6 +116,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // player move
   function movePlayer(e) {
     gameBoard.forEach((square => square.classList.remove('player')))
+    const originalIndex = playerIndex
     if(playerIndex > 690) {
       playerIndex--
     }
@@ -131,6 +132,8 @@ window.addEventListener('DOMContentLoaded', () => {
         playerIndex++
         gameBoard[playerIndex].classList.add('player')
         break
+      default:
+        gameBoard[originalIndex].classList.add('player')
     }
   }
 
@@ -175,7 +178,7 @@ window.addEventListener('DOMContentLoaded', () => {
         laser.position.splice(laserElement, 1)
         gameBoard[laserIndex].classList.remove('alien', 'laser')
         score++
-        scoreBoard.textContent = score
+        scoreBoard.textContent = score + '000'
         if (score === 14) {
           clearInterval(timer)
           alert('You win')
