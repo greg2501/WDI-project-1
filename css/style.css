@@ -51,3 +51,9 @@ body main .board .square {
   height: 10px;
   background: pink;
 }
+
+.alienAttack {
+width: 5px;
+height: 10px;
+background: green;
+}
