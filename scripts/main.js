@@ -82,15 +82,14 @@ window.addEventListener('DOMContentLoaded', () => {
     position: []
   }
 
-  // const attackIndex = alienAttack.position
   function alienAttacking() {
     const alienIndex = alien.position
     const attackerIndex = Math.floor(Math.random()*alienIndex.length)
     alienAttack.position.push(alien.position[attackerIndex])
     console.log('attack position', alien.position[attackerIndex])
-    // alien.position[attackerIndex].classList.add('alienAttack')
-
   }
+
+  //alien attack movement
   function attackMove() {
     for(let x = 0; x < alienAttack.position.length; x++) {
       if (alienAttack.position[x] < 0) {
@@ -100,7 +99,7 @@ window.addEventListener('DOMContentLoaded', () => {
         alienAttack.position[x] = alienAttack.position[x] + 30
         gameBoard[alienAttack.position[x]].classList.add('alienAttack')
       }
-      // checkHit(x)
+      checkAttackHit(x)
     }
   }
 
@@ -124,13 +123,13 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     switch(e.keyCode) {
       case 37:
-        playerIndex--
-        gameBoard[playerIndex].classList.add('player')
-        break
+      playerIndex--
+      gameBoard[playerIndex].classList.add('player')
+      break
       case 39:
-        playerIndex++
-        gameBoard[playerIndex].classList.add('player')
-        break
+      playerIndex++
+      gameBoard[playerIndex].classList.add('player')
+      break
     }
   }
 
@@ -143,12 +142,12 @@ window.addEventListener('DOMContentLoaded', () => {
     const laserIndex = playerIndex
     switch(e.keyCode) {
       case 32:
-        gameBoard[playerIndex].classList.add('laser')
-        laser.position.push(laserIndex)
-        break
+      gameBoard[playerIndex].classList.add('laser')
+      laser.position.push(laserIndex)
+      break
     }
   }
-
+  //
   function moveLaser() {
     for(let x = 0; x < laser.position.length; x++) {
       if (laser.position[x] < 0) {
@@ -162,8 +161,11 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  //make scoreboard
   const scoreBoard = document.querySelector('.score')
   let score = 0
+
+  //check hit for player laser
   function checkHit(laserElement) {
     const laserIndex = laser.position[laserElement]
     for (let x = 0; x < alien.position.length; x++) {
@@ -181,6 +183,16 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  //check hit for alien attack
+  function checkAttackHit(attackerElement) {
+    const attackIndex = alienAttack.position[attackerElement]
+    if (playerIndex === attackIndex) {
+      gameBoard[attackIndex].classList.remove('player', 'alienAttack')
+      scoreBoard.textContent = score
+      clearInterval(timer)
+      alert('Game Over')
+    }
+  }
 
 
   window.setInterval(attackMove, 100)
