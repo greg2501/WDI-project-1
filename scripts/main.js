@@ -2,6 +2,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const board = document.querySelector('.board')
 
+  const play = document.querySelector('.play')
+
+  play.addEventListener('click', () => {
+    score = 0
+    scoreBoard.textContent = score
+
+  })
+
   //create gameboard
   for(let i = 0; i < 720; i++) {
     const square = document.createElement('div')
@@ -94,7 +102,7 @@ window.addEventListener('DOMContentLoaded', () => {
   function attackMove() {
     for(let x = 0; x < alienAttack.position.length; x++) {
       if (alienAttack.position[x] < 0) {
-        alienAttack.position = alienAttack.position.filter(laser => laser > 720)
+        alienAttack.position = alienAttack.position.filter(alienAttack => alienAttack > 720)
       } else if (gameBoard[alienAttack.position[x]] !== undefined){
         gameBoard[alienAttack.position[x]].classList.remove('alienAttack')
         alienAttack.position[x] = alienAttack.position[x] + 30
@@ -198,6 +206,7 @@ window.addEventListener('DOMContentLoaded', () => {
       alert('Game Over')
     }
   }
+
 
 
   window.setInterval(attackMove, 100)
