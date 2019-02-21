@@ -38,6 +38,7 @@ window.addEventListener('DOMContentLoaded', () => {
   let gameOver = false
   const aliens = document.querySelectorAll('.alien')
   let movesMade = 0
+
   const timer = setInterval(() => {
     if (gameOver) {
       return
@@ -82,12 +83,12 @@ window.addEventListener('DOMContentLoaded', () => {
     position: []
   }
 
-  function alienAttacking() {
+  const alienAttacking = setInterval(() => {
     const alienIndex = alien.position
     const attackerIndex = Math.floor(Math.random()*alienIndex.length)
     alienAttack.position.push(alien.position[attackerIndex])
     console.log('attack position', alien.position[attackerIndex])
-  }
+  }, 500)
 
   //alien attack movement
   function attackMove() {
@@ -123,13 +124,13 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     switch(e.keyCode) {
       case 37:
-      playerIndex--
-      gameBoard[playerIndex].classList.add('player')
-      break
+        playerIndex--
+        gameBoard[playerIndex].classList.add('player')
+        break
       case 39:
-      playerIndex++
-      gameBoard[playerIndex].classList.add('player')
-      break
+        playerIndex++
+        gameBoard[playerIndex].classList.add('player')
+        break
     }
   }
 
@@ -142,9 +143,9 @@ window.addEventListener('DOMContentLoaded', () => {
     const laserIndex = playerIndex
     switch(e.keyCode) {
       case 32:
-      gameBoard[playerIndex].classList.add('laser')
-      laser.position.push(laserIndex)
-      break
+        gameBoard[playerIndex].classList.add('laser')
+        laser.position.push(laserIndex)
+        break
     }
   }
   //
@@ -190,13 +191,13 @@ window.addEventListener('DOMContentLoaded', () => {
       gameBoard[attackIndex].classList.remove('player', 'alienAttack')
       scoreBoard.textContent = score
       clearInterval(timer)
+      clearInterval(alienAttacking)
       alert('Game Over')
     }
   }
 
 
   window.setInterval(attackMove, 100)
-  window.setInterval(alienAttacking, 500)
   window.setInterval(moveLaser, 25)
   window.addEventListener('keydown', shooting)
   window.addEventListener('keydown', movePlayer)
