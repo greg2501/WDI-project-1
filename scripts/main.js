@@ -1,14 +1,19 @@
 window.addEventListener('DOMContentLoaded', () => {
 
   const board = document.querySelector('.board')
-
   const play = document.querySelector('.play')
 
   play.addEventListener('click', () => {
     score = 0
     scoreBoard.textContent = score
-
   })
+
+  const shootSound = document.getElementById('shoot')
+  shootSound.src = 'sound/shoot.wav'
+  const explosionSound = document.getElementById('explosion')
+  explosionSound.src = 'sound/explosion.wav'
+  const invaderKilledSound = document.getElementById('invaderKilled')
+  invaderKilledSound.src = 'sound/invaderKilled.wav'
 
   //create gameboard
   for(let i = 0; i < 720; i++) {
@@ -154,6 +159,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const laserIndex = playerIndex
     switch(e.keyCode) {
       case 32:
+        shootSound.play()
         gameBoard[playerIndex].classList.add('laser')
         laser.position.push(laserIndex)
         break
@@ -185,6 +191,7 @@ window.addEventListener('DOMContentLoaded', () => {
         alien.position.splice(x, 1)
         laser.position.splice(laserElement, 1)
         gameBoard[laserIndex].classList.remove('alien', 'laser')
+        invaderKilledSound.play()
         score++
         scoreBoard.textContent = score + '000'
         if (score === 14) {
@@ -199,6 +206,7 @@ window.addEventListener('DOMContentLoaded', () => {
   function checkAttackHit(attackerElement) {
     const attackIndex = alienAttack.position[attackerElement]
     if (playerIndex === attackIndex) {
+      explosionSound.play()
       gameBoard[attackIndex].classList.remove('player', 'alienAttack')
       scoreBoard.textContent = score
       clearInterval(timer)
