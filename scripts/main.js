@@ -28,7 +28,6 @@ window.addEventListener('DOMContentLoaded', () => {
   const alien = {
     position: [3, 5, 7, 9, 11, 34, 36, 38, 40, 63, 65, 67, 69, 71]
   }
-  // const alienIndex = alien.position
 
   gameBoard[3].classList.add('alien')
   gameBoard[5].classList.add('alien')
